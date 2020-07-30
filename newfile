@@ -1,0 +1,32 @@
+923  git init
+  924  touch file1
+  925  git status
+  926  git add file1
+  927  git commit -m "first commit" 
+  928  git log --graph --oneline 
+  929  echo Second >> file1 
+  930  git status
+  931  git add file1
+  932  git commit -m "second commit" 
+  933  git log --graph --oneline 
+  934  git checkout -b feature-branch 
+  935  touch file2
+  936  git status
+  937  git add file2
+  938  git commit -m "awesome feature"
+  939  git log --graph --oneline --all
+  940  git checkout master
+  941  echo "New" >>file1 
+  942  git add .
+  943  git commit -m "third commit"
+  944  git log --graph --oneline --all
+  945  git merge feature-branch --no-ff
+  946  git log --graph --oneline --all
+  947  ls
+  948  cat file2
+  949  echo "new cool feature" >> file2
+  950  git add file2 
+  951  git commit -m "fourth commit"
+  952  git log -- graph --oneline 
+  953  git log --graph --oneline 
+
