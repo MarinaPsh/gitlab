@@ -1,0 +1,17 @@
+#!/bin/bash
+source /home/user/task/myscript
+get_list>/home/user/task/myfile
+current_hash=$(md5sum /home/user/task/myfile | awk {'print $1'})
+if [ -f /var/log/current_users ]
+then	
+	current_users_hash=$(tail -n1 /var/log/current_users)
+	if [ $current_users_hash != $current_hash ]
+	then
+           echo $current_hash>/var/log/current_users	   
+	   echo "$(date +%d-%m-%Y\ %T) changes occured with hash">>/var/log/user_changes	
+        fi
+else 
+    echo $current_hash>/var/log/current_users
+fi    
+rm /home/user/task/myfile
+logger -t "Hash script" "Running the script"
