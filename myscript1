@@ -5,7 +5,7 @@ function get_users_list()
 }
 
 get_users_list>/tmp/users_list
-current_hash=$(md5sum /tmp/list | awk {'print $1'})
+current_hash=$(md5sum /tmp/users_list | awk {'print $1'})
 if [ -f /var/log/current_users ]
 then	
 	current_users_hash=$(tail -n1 /var/log/current_users)
