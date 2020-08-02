@@ -1,10 +1,10 @@
 #!/bin/bash
-function get_list()
+function get_users_list()
 {
     awk -F : '{print $1 ":", $6}' /etc/passwd
 }
 
-get_list>/tmp/list
+get_users_list>/tmp/users_list
 current_hash=$(md5sum /tmp/list | awk {'print $1'})
 if [ -f /var/log/current_users ]
 then	
@@ -12,10 +12,10 @@ then
 	if [ $current_users_hash != $current_hash ]
 	then
            echo $current_hash>/var/log/current_users	   
-	   echo "$(date +%d-%m-%Y\ %T) changes occured with hash">>/var/log/user_changes	
+	   echo "$(date +%d-%m-%Y\ %T) changes occured">>/var/log/user_changes	
         fi
 else 
     echo $current_hash>/var/log/current_users
 fi    
-rm /tmp/list
+rm /tmp/users_list
 logger -t "Hash script" "Running the script"
